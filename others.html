@@ -79,20 +79,15 @@
             <svg class="visitor-icon" viewBox="0 0 24 24" width="16" height="16">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" fill="currentColor"/>
             </svg>
-            <span class="visitor-label">Visitors:</span>
-            <span id="ga-visitors">-</span>
+            <span class="visitor-label">UV:</span>
+            <span id="busuanzi_value_site_uv"></span>
+            <span class="visitor-label" style="margin-left: 10px;">PV:</span>
+            <span id="busuanzi_value_site_pv"></span>
         </div>
     </div>
 
-    <script>
-        // 这里需要使用 Google Analytics API 获取访问数据
-        // 需要额外设置 Google Analytics API 访问权限
-        // 以下是示例代码，实际实现需要根据 GA4 API 文档进行调整
-        async function getVisitorCount() {
-            // 这里添加 GA4 API 调用代码
-            // 由于 API 调用需要认证，建议通过后端服务器进行
-        }
-    </script>
+    <!-- 不蒜子计数脚本 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <style>
         .glass-card {
