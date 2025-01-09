@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiuHaiyang - Books</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/profile.png">
+    <style>
+        /* 复制基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white !important;
+        }
+
+        .container {
+            background-color: white !important;
+            margin-top: 0;
+            padding-top: 0;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            border: none !important;
+            background-color: #f5f5f5 !important;
+            min-height: 100vh;
+            width: 200px;
+            position: sticky;
+            top: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0;
+            margin-left: 20px;
+            padding-top: 0;
+            background-color: white;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        .profile-name .en {
+            font-family: Arial, sans-serif;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .profile-name .cn {
+            font-family: "PingFang SC", "PingFang TC", sans-serif;
+            display: block;
+            font-weight: bold;
+        }
+
+        .profile-section {
+            border: none !important;
+            background-color: #f5f5f5 !important;
+        }
+
+        .profile-links {
+            border-top: none !important;
+            background-color: #f5f5f5 !important;
+            padding-left: 15px;
+        }
+
+        .link-item {
+            background-color: #f5f5f5 !important;
+            text-align: left;
+            padding: 8px 0;
+        }
+
+        .link-item span {
+            display: inline-block;
+            min-width: 60px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        /* 修改路径栏样式 */
+        .path-nav {
+            color: #666666;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
+            margin-bottom: 0;
+        }
+
+        /* 修改书籍内容样式 */
+        .book-content {
+            font-family: SimSun, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            line-height: 1.8;
+            background-color: transparent;
+            padding: 20px;
+        }
+
+        .book-title {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .book-date {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .book-note {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        /* 修改年份标题样式 */
+        .year-title {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 添加图片样式 */
+        .book-image {
+            width: 120px;
+            height: auto;
+            margin-right: 20px;
+            float: left;
+        }
+
+        /* 添加书籍容器样式 */
+        .book-container {
+            display: flex;
+            margin: 20px;
+        }
+
+        /* 添加分割线样式 */
+        .year-divider {
+            border: none;
+            border-top: 1px solid black;
+            margin: 20px;
+        }
+
+        /* 修改标题样式 */
+        .section-title {
+            color: black;
+            font-size: 16px;
+            font-weight: normal;
+            margin: 40px 20px 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 修改分割线样式 */
+        .divider {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 0;
+            margin-left: 20px;
+            width: calc(100% - 40px);
+        }
+
+        /* 添加图片网格容器样式 */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 150px);  /* 每列固定宽度 */
+            gap: 20px;
+            padding: 20px;
+            margin: 0 20px;
+        }
+
+        /* 修改图片占位框样式 */
+        .book-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .book-placeholder:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 修改图片样式 */
+        .book-cover {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* 添加图标样式 */
+        .icon {
+            width: 16px;  /* 设置图标宽度 */
+            height: auto;  /* 高度自动调整以保持比例 */
+            vertical-align: middle;  /* 垂直居中对齐 */
+            margin-right: 8px;  /* 图标与文本之间的间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="images/profile.png" alt="Profile">
+                </div>
+                <div class="profile-name">
+                    <span class="en">LiuHaiyang</span>
+                    <span class="cn">刘海洋</span>
+                </div>
+            </div>
+            <div class="profile-links">
+                <a href="mailto:15035689055liuhaiyang@gmail.com" class="link-item">
+                    <img src="images/mail.png" alt="Email" class="icon">
+                    <span>Email</span>
+                </a>
+                <a href="https://orcid.org/0009-0009-8701-0538" class="link-item">
+                    <img src="images/id.png" alt="ORCiD" class="icon">
+                    <span>ORCiD</span>
+                </a>
+                <a href="https://maps.app.goo.gl/EEunaQVkdbAjMVaL8" class="link-item">
+                    <img src="images/location.png" alt="Location" class="icon">
+                    <span>Location</span>
+                </a>
+                <div style="height: 20px;"></div>
+                <a href="index.html" class="link-item">
+                    <img src="images/academic.png" alt="Academic" class="icon">
+                    <span>Academic</span>
+                </a>
+                <a href="others.html" class="link-item">
+                    <img src="images/others.png" alt="Others" class="icon">
+                    <span>Others</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="path-nav">/ Others / Books</div>
+            <h2 class="section-title">2024</h2>
+            <hr class="divider">
+            <div class="book-grid">
+                <div class="book-placeholder">
+                    <img src="images/20241.jpg" alt="献给阿尔吉侬的花束" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20242.jpg" alt="晚熟的人" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20243.jpg" alt="挪威的森林" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20244.jpg" alt="好骨头" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20245.jpg" alt="偶发空缺" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20246.jpg" alt="罗生门" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20247.jpg" alt="永恒的终结" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20248.jpg" alt="灿烂千阳" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20249.jpg" alt="索拉里斯星" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/202410.jpg" alt="窗边的小豆豆" class="book-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleYear(element) {
+            element.classList.toggle('collapsed');
+            const content = element.nextElementSibling;
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html> 
