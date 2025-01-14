@@ -129,11 +129,23 @@
             background-color: #f5f5f5 !important;
             text-align: left;  /* 文字左对齐 */
             padding: 8px 0;  /* 保持上下内边距 */
+            text-decoration: none;  /* 默认无下划线 */
         }
 
+        /* 添加与 supervisor-link 相同的悬停效果 */
+        .link-item:hover {
+            text-decoration: underline;  /* 鼠标悬停时显示下划线 */
+        }
+
+        /* 确保链接文本不会被图标的样式影响 */
         .link-item span {
             display: inline-block;
-            min-width: 60px;  /* 设置最小宽度 */
+            min-width: 60px;
+            text-decoration: none;  /* 默认无下划线 */
+        }
+
+        .link-item:hover span {
+            text-decoration: underline;  /* 鼠标悬停时显示下划线 */
         }
 
         /* 修改问候语样式 */
@@ -426,6 +438,7 @@
             <ul class="list-unstyled">
                 <li class="list-item">International Journal of Applied Earth Observation and Geoinformation</li>
                 <li class="list-item">All Earth</li>
+                <li class="list-item">GIScience & Remote Sensing</li>
             </ul>
 
             <h2 class="section-title">Specialized software</h2>
