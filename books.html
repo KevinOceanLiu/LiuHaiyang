@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiuHaiyang - Books</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/profile.png">
+    <style>
+        /* 复制基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white !important;
+        }
+
+        .container {
+            background-color: white !important;
+            margin-top: 0;
+            padding-top: 0;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            border: none !important;
+            background-color: #6BC49C !important;
+            min-height: 100vh;
+            width: 200px;
+            position: sticky;
+            top: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0;
+            margin-left: 20px;
+            padding-top: 0;
+            background-color: white;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #6BC49C;
+        }
+
+        .profile-name .en {
+            font-family: Arial, sans-serif;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .profile-name .cn {
+            font-family: "PingFang SC", "PingFang TC", sans-serif;
+            display: block;
+            font-weight: bold;
+        }
+
+        .profile-section {
+            border: none !important;
+            background-color: #6BC49C !important;
+        }
+
+        .profile-links {
+            border-top: none !important;
+            background-color: #6BC49C !important;
+            padding-left: 15px;
+        }
+
+        .link-item {
+            background-color: #6BC49C !important;
+            text-align: left;
+            padding: 8px 0;
+            text-decoration: none;
+        }
+
+        .link-item span {
+            display: inline-block;
+            min-width: 60px;
+            font-size: 16px;
+            font-weight: normal;
+            text-decoration: none;
+        }
+
+        .link-item:hover {
+            text-decoration: underline;
+        }
+
+        .link-item:hover span {
+            text-decoration: underline;
+        }
+
+        /* 修改路径栏样式 */
+        .path-nav {
+            color: #666666;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
+            margin-bottom: 0;
+        }
+
+        /* 修改书籍内容样式 */
+        .book-content {
+            font-family: SimSun, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            line-height: 1.8;
+            background-color: transparent;
+            padding: 20px;
+        }
+
+        .book-title {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .book-date {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .book-note {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        /* 修改年份标题样式 */
+        .year-title {
+            font-family: Arial, "宋体", serif;
+            font-size: 16px;
+            color: black;
+            margin: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 添加图片样式 */
+        .book-image {
+            width: 120px;
+            height: auto;
+            margin-right: 20px;
+            float: left;
+        }
+
+        /* 添加书籍容器样式 */
+        .book-container {
+            display: flex;
+            margin: 20px;
+        }
+
+        /* 添加分割线样式 */
+        .year-divider {
+            border: none;
+            border-top: 1px solid black;
+            margin: 20px;
+        }
+
+        /* 修改标题样式 */
+        .section-title {
+            color: black;
+            font-size: 16px;
+            font-weight: normal;
+            margin: 40px 20px 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 修改分割线样式 */
+        .divider {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 0;
+            margin-left: 20px;
+            width: calc(100% - 40px);
+        }
+
+        /* 修改图片网格容器样式 */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 150px);  /* 每列固定宽度 */
+            gap: 20px;
+            padding: 20px;
+            margin: 0 20px;
+            overflow-x: auto;  /* 添加水平滚动条 */
+            min-width: min-content;  /* 确保内容不会被压缩 */
+            -webkit-overflow-scrolling: touch;  /* 在iOS设备上实现平滑滚动 */
+        }
+
+        /* 为了美观，可以自定义滚动条样式 */
+        .book-grid::-webkit-scrollbar {
+            height: 8px;  /* 滚动条高度 */
+        }
+
+        .book-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;  /* 滚动条轨道颜色 */
+            border-radius: 4px;
+        }
+
+        .book-grid::-webkit-scrollbar-thumb {
+            background: #888;  /* 滚动条滑块颜色 */
+            border-radius: 4px;
+        }
+
+        .book-grid::-webkit-scrollbar-thumb:hover {
+            background: #555;  /* 滚动条滑块悬停颜色 */
+        }
+
+        /* 修改图片占位框样式 */
+        .book-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .note-icon {
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        /* 修改图片样式 */
+        .book-cover {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* 添加图标样式 */
+        .icon {
+            width: 16px;  /* 设置图标宽度 */
+            height: auto;  /* 高度自动调整以保持比例 */
+            vertical-align: middle;  /* 垂直居中对齐 */
+            margin-right: 8px;  /* 图标与文本之间的间距 */
+        }
+
+        /* 添加模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            position: relative;
+            background-image: 
+                linear-gradient(#e0efe0 1px, transparent 1px),
+                linear-gradient(90deg, #e0efe0 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-color: #f8fff8;
+            margin: 5% auto;
+            padding: 20px;
+            width: 70%;
+            max-width: 800px;
+            max-height: 80vh;
+            border-radius: 12px;
+            overflow-y: auto;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-date {
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .modal-text {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .quote {
+            border-left: 3px solid #ccc;
+            padding-left: 15px;
+            margin: 15px 0;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="images/profile.png" alt="Profile">
+                </div>
+                <div class="profile-name">
+                    <span class="en">LiuHaiyang</span>
+                    <span class="cn">刘海洋</span>
+                </div>
+            </div>
+            <div class="profile-links">
+                <a href="mailto:15035689055liuhaiyang@gmail.com" class="link-item">
+                    <img src="images/mail.png" alt="Email" class="icon">
+                    <span>Email</span>
+                </a>
+                <a href="https://orcid.org/0009-0009-8701-0538" class="link-item">
+                    <img src="images/id.png" alt="ORCiD" class="icon">
+                    <span>ORCiD</span>
+                </a>
+                <a href="https://maps.app.goo.gl/EEunaQVkdbAjMVaL8" class="link-item">
+                    <img src="images/location.png" alt="Location" class="icon">
+                    <span>Location</span>
+                </a>
+                <div style="height: 20px;"></div>
+                <a href="index.html" class="link-item">
+                    <img src="images/academic.png" alt="Academic" class="icon">
+                    <span>Academic</span>
+                </a>
+                <a href="others.html" class="link-item">
+                    <img src="images/others.png" alt="Others" class="icon">
+                    <span>Others</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="path-nav">/ Others / Books</div>
+            <h2 class="section-title">2025</h2>
+            <hr class="divider">
+            <div class="book-grid">
+                <div class="book-placeholder">
+                    <img src="images/20251.jpg" alt="乔瓦尼的房间" class="book-cover" onclick="openModal()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20252.jpg" alt="2025新图片" class="book-cover">
+                </div>
+            </div>
+            
+            <!-- 添加模态框 -->
+            <div id="bookModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div class="modal-title">《乔瓦尼的房间-美国-詹姆斯·鲍德温 (James Baldwin)》</div>
+                    <div class="modal-date">2025-02-06</div>
+                    <div class="modal-text">
+                        7：很流畅的文字，已经可以断定是本好书。别的书偶尔来一句100分的金句，他每句话都至少80分。<br><br>
+                        19：他为什么把人物的情感描写的这么好啊。<br><br>
+                        42：gay果然都是哲学家与毒舌妇的结合体，尤其是"宇宙中心"巴黎的gay。<br><br>
+                        73：乔瓦尼的房间原来也是主人公大卫的房间。<br><br>
+                        85：很喜欢乔瓦尼说话的语气。<br><br>
+                        87：书名又可写成：致我逝去的爱情。<br><br>
+                        133：是冲突四起，情绪激烈的舞台剧，也是绝望伤心的诗，巴黎，总是弥漫着荷尔蒙的巴黎。<br><br>
+                        150：这是我看过最残酷的分手。"再见，乔瓦尼"，"再见，亲爱的。"<br><br>
+                        170：法国版的霸王别姬。<br><br>
+
+                        <div style="padding: 8px 15px; margin: 15px 0;">
+                            <span style="font-size: 18px;">摘录</span>
+                        </div>
+
+                        <div class="quote" style="line-height: 2; font-weight: normal;">
+                            "也许家不是一个地方，而是一种不可更改的状态。"<br><br>
+                            "我跟我父亲正经历着所有年轻人与长辈之间都要经历的事：我开始对他有所批判。这种批判的严苛令我心碎，虽然当时我说不出口，却揭示了我曾多么爱他的事实，而那份爱，正与我的天真一同消逝。"<br><br>
+                            "我父亲有时候会骄傲地说，我们不像是父子，像好兄弟。我想我父亲有时当真这么认为。我从来都不信。我不想当他的兄弟，我想当他的儿子。我们俩之间那种男人与男人的坦率，让我筋疲力尽而且惊慌失措。做父亲的不应该在儿子面前完全赤裸。我不想知道——反正不想从他嘴里知道——他的肉体跟我的一样死性不改，知道那样的事不会让我觉得更像他的儿子——或是兄弟——那只会让我觉得像个入侵者，而且饱受惊吓。他以为我们很像。我不愿那样想。我不想认为我的生命会跟他一样，或者我的心智可以变得如此苍白，那么的缺乏棱角与敏锐度。他希望我们之间没有距离，希望我像看待自己一样看待他。但我要的是父亲与儿子之间一点仁慈的距离，那才可能让我爱他。"<br><br>
+                            "柜台后面坐了一位那种绝对无法仿效、不可能被击败的女士，只有在巴黎这个城市才看得到，但这里有很多像她们这样的人，如果她们出现在别的城市，会像美人鱼出现在山顶一样让人震惊而不安。巴黎到处都有这样的女士，她们就像雌鸟在巢里一样坐在柜台后面，像孵蛋一样盯着收银机。天下的事没有一件逃得过她们的眼睛，如果她们能被什么事情惊动，那也只是在梦里——而她们早就不再做梦。她们的心肠不好也不坏，她们有自己的风格，而且，在某种层面上，就好像人们知道自己需要上厕所，她们对于所有进出的人了解得一清二楚。有些有白发，有些没有，有些胖，有些瘦，有些已经是祖母，有些到最近还是处女，她们全都有一样世故而空洞、全知的眼神；很难相信她们曾哭着要奶喝，或看过太阳；她们好像一出世就渴望着钞票，眼睛无可救药地眯起来，只有看到收银机才能对焦。"<br><br>
+                            "如果你的同胞认为隐私是一种罪，你的国家真是糟糕。"<br><br>
+                            "我明白这样的孩子气在我的年纪非常美妙，我从中得到的快乐更是无以言表；那个时刻我真的很爱乔瓦尼，那个下午他美丽非凡。看着他的脸我也发现，能够让他的脸充满光彩对我而言竟是那么重要。我发现我可能愿意付出一切以确保自己不会失去那个力量。我感到自己流向他，像河上的冰破碎时水快速地流动。"<br><br>
+                            "很年轻的时候我想过自杀，可能大家都想过，但那时可能是为了报复，那是我告诉这个世界我是如何受苦的方式。"<br><br>
+                            "你要离开才会有家，然后，等你离开以后，你永远不能回去。"<br><br>
+                            "你才没有，"乔瓦尼大喊，坐了起来，"爱任何人！你从来没有爱过人，我敢确定你以后也不会！你爱自己的纯洁，你爱你的镜子——你就像个年轻的处女，走路的时候把手放在面前，好似你两腿之间有什么珍贵的金属，金子，银子，宝石，甚至钻石！你永远不会给任何人，永远也不会让别人碰——不管是男人还是女人。你想落得干净。你觉得你满身肥皂味地进来，还想满身肥皂味地出去——这段时间你不想变臭，甚至五分钟都不愿意。"他抓住我的领子，边扭边爱抚，既刚且柔：嘴唇旁有喷出的唾液，眼里都是眼泪，但脸上的骨架明显，手臂和肩膀可以看出肌肉的线条。"你想离开乔瓦尼因为他害你变臭。你看不起乔瓦尼因为他不怕爱的臭味。你想要杀了他，为了你那些骗人的小道德。而你——你是最不道德的。你是我这一生认识的人里最不道德的一个。你看，看你对我干的好事。你觉得如果我不爱你的话你能办得到吗？这就是你对爱的回应？"<br><br>
+                            "我对你而言什么都不是，你只带给我狂热，但没有喜悦。"<br><br>
+                            "你不知道是吧？晚上清醒躺在床上等待某人回家的感觉。我敢肯定你不知道。你什么都不知道。那些可怕的事情你都不知道——所以你才能微笑，才能那样跳舞，你以为你跟那个短头发圆脸的小女孩在演的戏就是爱。"<br><br>
+                            "我每走一步，回头的可能性就更小。我的脑子空空——或说我的脑子变成一个巨大的上了麻药的伤口。我只是在想，有一天我会为此哭泣的。有一天我会开始哭的。"<br><br>
+                            "很难说这忧郁到底是哪里来的，有时它就笼罩在我们身上，像是一只大型掠食性的鸟的阴影。我不觉得赫拉不快乐，因为我前所未有地攀附着她。但也许她感觉到，有一些时候，我的攀附似乎太急于博取信任，当然也就不会长久。"<br><br>
+                            "有一些女人已经忘记当一个女人不一定得蒙羞，不是只有痛苦。我还没有忘记。"
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">2024</h2>
+            <hr class="divider">
+            <div class="book-grid">
+                <div class="book-placeholder">
+                    <img src="images/20241.jpg" alt="献给阿尔吉侬的花束" class="book-cover" onclick="openModal2024_1()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20242.jpg" alt="晚熟的人" class="book-cover" onclick="openModal2024_2()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20243.jpg" alt="挪威的森林" class="book-cover" onclick="openModal2024_3()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20244.jpg" alt="好骨头" class="book-cover" onclick="openModal2024_4()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20245.jpg" alt="偶发空缺" class="book-cover" onclick="openModal2024_5()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20246.jpg" alt="罗生门" class="book-cover" onclick="openModal2024_6()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20247.jpg" alt="永恒的终结" class="book-cover" onclick="openModal2024_7()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20248.jpg" alt="灿烂千阳" class="book-cover" onclick="openModal2024_8()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20249.jpg" alt="索拉里斯星" class="book-cover" onclick="openModal2024_9()">
+                    <span class="note-icon">✒️</span>
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/202410.jpg" alt="索拉里斯星" class="book-cover" onclick="openModal2024_10()">
+                    <span class="note-icon">✒️</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">2023</h2>
+            <hr class="divider">
+            <div class="book-grid">
+                <div class="book-placeholder">
+                    <img src="images/20231.jpg" alt="20231" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20232.jpg" alt="20232" class="book-cover">
+                </div>
+                <div class="book-placeholder">
+                    <img src="images/20233.jpg" alt="20233" class="book-cover">
+                </div>
+            </div>
+
+            <h2 class="section-title">2022</h2>
+            <hr class="divider">
+            <div class="book-grid">
+                <div class="book-placeholder"><img src="images/20221.jpg" alt="20221" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20222.jpg" alt="20222" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20223.jpg" alt="20223" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20224.jpg" alt="20224" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20225.jpg" alt="20225" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20226.jpg" alt="20226" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20227.jpg" alt="20227" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20228.jpg" alt="20228" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20229.jpg" alt="20229" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202210.jpg" alt="202210" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202211.jpg" alt="202211" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202212.jpg" alt="202212" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202213.jpg" alt="202213" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202214.jpg" alt="202214" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202215.jpg" alt="202215" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202216.jpg" alt="202216" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202217.jpg" alt="202217" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202218.jpg" alt="202218" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202219.jpg" alt="202219" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202220.jpg" alt="202220" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202221.jpg" alt="202221" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202222.jpg" alt="202222" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/202223.jpg" alt="202223" class="book-cover"></div>
+            </div>
+
+            <!-- 添加2024-1书籍的模态框 -->
+            <div id="bookModal2024_1" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_1()">&times;</span>
+                    <div class="modal-title">《献给阿尔吉侬的花束-美国-丹尼尔·凯斯 (Daniel Keyes)》</div>
+                    <div class="modal-date">2024-03-10</div>
+                    <div class="modal-text">
+                        209页：这是精神分裂的前兆吗？看得想哭，看到了自己。<br><br>
+                        完结：几度落泪，完整又完美的故事，收入到最爱系列。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-2书籍的模态框 -->
+            <div id="bookModal2024_2" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_2()">&times;</span>
+                    <div class="modal-title">《晚熟的人-中国-莫言》</div>
+                    <div class="modal-date">2024-06-28</div>
+                    <div class="modal-text">
+                        莫言的回忆录集，故事很平庸，所以不可能有酒国，檀香刑那样的荡气婉转。3.5分。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-3书籍的模态框 -->
+            <div id="bookModal2024_3" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_3()">&times;</span>
+                    <div class="modal-title">《挪威的森林-日本-村上春树 (Haruki Murakami)》</div>
+                    <div class="modal-date">2024-07-05</div>
+                    <div class="modal-text">
+                        给2.5/5分。直子，玲子，绿子我都不喜欢，觉得他们莫名其妙，没有底线，矫揉造作。渡边君呢，比张无忌厉害，不用绝世武功，不用花言巧语，不用帅气外表，所有人见了就爱他，为他奉献身体。人们为啥爱这本书？可能归功于伍佰的歌曲，还有书里面毫无美感的性行为描写，有性描写并不会让一本书低俗，氛围合适时候的sex 也可以理解，但书里的性行为是在讨好读者，给读者多巴胺，来弥补故事的不足。青春文学不该这么肤浅。如果诺贝尔委员会把文学奖颁给这样的作家，那我真的会很失望。不过读完之后想重温日剧《四重奏》了。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-4书籍的模态框 -->
+            <div id="bookModal2024_4" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_4()">&times;</span>
+                    <div class="modal-title">《好骨头-加拿大-玛格丽特·阿特伍德 (Margaret Atwood)》</div>
+                    <div class="modal-date">2024-07-06</div>
+                    <div class="modal-text">
+                        可以把它理解为一些女权主义诗歌吧，但是大部分还是写的过于隐晦了，有点不知所云。不过有些文章真的很有趣，比如《从前有个》。3.5/5。另外，一本新书开头是译者的序，难道不是对原作者的不尊重吗？我拿到一本书，最期待的是第一时间目睹作者的文字，而不是一些评价或者总结。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-5书籍的模态框 -->
+            <div id="bookModal2024_5" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_5()">&times;</span>
+                    <div class="modal-title">《偶发空缺-英国-J. K. 罗琳 (J. K. Rowling)》</div>
+                    <div class="modal-date">2024-10-26</div>
+                    <div class="modal-text">
+                        第一本JK罗琳的作品。<br><br>
+                        82/495： 又在这本书里找到了那种感觉，好像周围的天气都和书里的一样，我就站在人物身后感受他们的情绪，自己的经历也在被一一唤醒。<br><br>
+                        134/495：罗琳的描写太细致了，很精彩，但故事情节推进的很慢。有利有弊。<br><br>
+                        260/495: 罗琳的比喻，人物的微表情，小心思的刻画都绝了，实在太多很妙的句子，对，就是妙语连珠。 影视化的作品果然只能看到故事冰山一角。<br><br>
+                        310/495:孩子们的报复让我看的大快人心。<br><br>
+                        380/495:这就是现实，令人无奈的现实，正义被当成疯子，邪恶微笑着说着谎言。 萨咪喜欢的乐队原型就是单向乐队吧，可惜最近Liam死了。 所有人都在迎接暴风雨，一条条支线交汇了，戏剧要迎来高潮。<br><br>
+                        782/800:想起了《无声告白》，父母终于看到了曾经忽略的小孩。所有的人成长了吧。<br><br>
+                        这个书的封面设计的不合理，书里投票的时候，选框里是打的叉号。<br><br>
+
+                        <div style="padding: 8px 15px; margin: 15px 0;">
+                            <span style="font-size: 18px;">摘录</span>
+                        </div>
+
+                        <div class="quote" style="line-height: 2; font-weight: normal;">
+                            "毫不扭捏地表现自己的人--而且上帝知道成人世界中这种人的数量有多小--在年轻人中间会很自然地拥有威信，真应该强迫这些人从事教育工作。"<br><br>
+                            "婚姻对于局外人来说总是谜团，"她小心地说，"除了两个当事人，没人真正知道个中滋味。"<br><br>
+                            "可是，谁又能忍心知道哪颗星已经死去，她眨着眼睛望着夜空想，有任何人忍心知道事实上所有的星星都已经死去了吗？"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 修改2024-8书籍的模态框 -->
+            <div id="bookModal2024_8" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_8()">&times;</span>
+                    <div class="modal-title">《窗边的小豆豆-日本-黑柳彻子 (Tetsuko Kuroyanagi)》</div>
+                    <div class="modal-date">2024-11-13</div>
+                    <div class="modal-text">
+                        20/271:真的把孩子的童趣行为描写的惟妙惟肖，挺搞笑的。<br><br>
+                        108/271：好像为什么写成"好象"，感觉自己读了盗版书，越读越觉得幼稚，有点无聊了，只适合儿童读。<br><br>
+                        不太适合进豆瓣top250吧。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-6书籍的模态框 -->
+            <div id="bookModal2024_6" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_6()">&times;</span>
+                    <div class="modal-title">《灿烂千阳-美国-卡勒德·胡赛尼 (Khaled Hosseini)》</div>
+                    <div class="modal-date">2024-10-31</div>
+                    <div class="modal-text">
+                        3天就看完了，因为它让人如痴如醉，泪水，希望，悲伤，愤怒，虔诚所有的情绪交织在一起，我看到了玛丽亚姆的一生，众多阿富汗女人的一生。<br><br>
+                        最后一章有点一般，但是前三章太完美，我还是要给她，这本书是她，满分。<br><br>
+                        看完之后有点爱上了阿富汗，爱上了那里受尽苦难的人民拥有的那种坚韧，黄色干涸的大地一样的坚韧。那里女人的忍耐与总是没有放弃希望，热爱自己家园的心灵。<br><br>
+                        天涯共此时，这个世界有它的参差，历史继续轮回。如今，阿富汗又迎来塔利班执政，某个泥屋里穿着蓝色的布卡的15岁女孩也许正在被自己大30岁的丈夫家暴，世界的另一边，灯火通明的摩天大楼里一个上班族在电脑前忙碌的赶着工作，但有一刻，他们的心连在了一起。<br><br>
+                        娜娜在我的脑海里挥之不去，总是让我想起自己的母亲，她的那句话不停地在我耳边回响："像你和我这样的女人，这辈子只需要学会一种本领就好了。学校不会教你这种本领。看着我，看着我，只有一项本领。就是这个：忍耐"。<br><br>
+
+                        <div style="padding: 8px 15px; margin: 15px 0;">
+                            <span style="font-size: 18px;">摘录</span>
+                        </div>
+
+                        <div class="quote" style="line-height: 2; font-weight: normal;">
+                            "她想起了娜娜曾经对她说过，每一片雪花都是人世间某个悲哀的女人叹出的一口气。她还说所有这些叹息飘到天上，聚成了云层，然后变成细小的雪花，寂静地飘落在地面的人们身上。"<br><br>
+                            "莱拉终于明白了，男孩对待友谊，就像他们对待太阳一样：它的存在毋庸置疑，它的光芒最好是用来享受，而不是用来直视。"<br><br>
+                            "随着时间的流逝，她将会慢慢厌倦这种行为。她将会明白，召唤死去已久的回忆、掸走它上面的灰尘、使它重新浮现是一件越来越耗费精力的事情。"<br><br>
+                            "爱是使人遍体鳞伤的错误，而它的帮凶，希望，则是令人悔恨莫及的幻想。无论什么时候，若这一对剧毒的两生花开始在那片干涸的土地上生长出来，玛丽雅姆就会将它们连根拔除。她把它们拔起来，还没拿稳就赶紧将其掩埋。"<br><br>
+                            "人生就是这样的，在心碎之后，我们还得忍受一次又一次的悲伤。"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-7书籍的模态框 -->
+            <div id="bookModal2024_7" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_7()">&times;</span>
+                    <div class="modal-title">《罗生门-日本-芥川龙之介 (Ryunosuke Akutagawa)》</div>
+                    <div class="modal-date">2024-11-04</div>
+                    <div class="modal-text">
+                        一些朴素的小故事，就像没有工业香精的古早味道，在一些人看来可能很美，但我感觉无聊且缺乏写作手法，也许是翻译的问题？<br><br>
+                        最后一章是作者的读书笔记和人生哲理合集，而且他很调皮，反思批判了很多常识性的东西。这点幽默让我喜欢。<br><br>
+                        很多人喜欢读这些直接给的道理，可这些貌似是最容易忘记的东西。<br><br>
+                        可以看出中华文化对作者影响之深远。<br><br>
+
+                        <div style="padding: 8px 15px; margin: 15px 0;">
+                            <span style="font-size: 18px;">摘录</span>
+                        </div>
+
+                        <div class="quote" style="line-height: 2; font-weight: normal;">
+                            "肆意违反道德者乃经济意识匮乏之人；一味屈从道德者乃懦夫或懒汉。"<br><br>
+                            "老好人最像的是天上的神。第一适合对其讲述欢喜，第二适合与之倾诉不幸，第三是可有可无。"<br><br>
+                            "道德赐予的恩惠是时间与力气的节省，而带来的损害则是良心的彻底麻痹。"<br><br>
+                            "肆意违反道德者乃经济意识匮乏之人；一味屈从道德者乃懦夫或懒汉。"<br><br>
+                            "道德经常身着古装出场。"<br><br>
+                            "中庸在英语中为good sense。据我所信，除非具有good sense，否则就无以得到任何幸福。"<br><br>
+                            "正义类似武器。只要出钱，武器即可为敌方又可为我方所收买。而正义也是如此，只要振振有词，即为敌方又为我方所拥有。"<br><br>
+                            "武器本身不足为惧，恐惧的是武将的武艺。正义本身不足为惧，恐惧的是煽动家的雄辩。"<br><br>
+                            "我的外甥梦想购买伦勃朗的肖像画。却不梦想得到十元钱。因为十元零花钱过于充满真实的幸福。"<br><br>
+                            "连丑闻都制造不出的凡夫俗子们在所有名士的丑闻中找出了足以辩护自己怯懦无能的最好武器，同时物色到了赖以树立自己实际上并不存在的优势的台基。"<br><br>
+                            "具有艺术家气质的青年，对"人之恶"的发现总是落于人后。"<br><br>
+                            "为了微妙地享乐，我们又必须微妙地受苦。"<br><br>
+                            "女人并不想找老好人做丈夫。男人则总想找老好人做朋友。"<br><br>
+                            "忍让是浪漫的卑躬屈膝。"<br><br>
+                            "结婚对于调节性欲是有效的，却不足以调节爱情。"<br><br>
+                            "自由类似山巅的空气。对于弱者，二者同样是不堪忍受的。"<br><br>
+                            "今日中国的最大悲剧，就是没有一位足以给无数国家浪漫主义者即"年轻中国"以铁的训练的墨索里尼。"<br><br>
+                            "使我们拿起武器的通常是对敌手的恐怖，并且往往是对凭空想象的敌手的恐怖。"<br><br>
+                            "恋爱不过是披以诗的外衣的性欲。至少不披以诗的外衣的性欲不值得称之为恋爱。"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-9书籍的模态框 -->
+            <div id="bookModal2024_9" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_9()">&times;</span>
+                    <div class="modal-title">《永恒的终结-美国-艾萨克·阿西莫夫 (Isaac Asimov)》</div>
+                    <div class="modal-date">2024-11-17</div>
+                    <div class="modal-text">
+                        第一章：果然，爱情，这种感性的东西一定会出现在这么理性的文字中，最后一刻，它出现了。文字的氛围很神秘，从一个奇特的场景入手，情节自然缓缓展开。 还有就是我发现好的作者爱用的一种表现手法就是用一些微动作表现情绪，比如： "社会学家的脸马上抽搐了一下。" "哈伦的喉咙里有些干涩。"新手的声音里有点抗拒的意思"，"伏伊干巴巴地说"<br><br>
+                        第八章：为什么又是为了爱情对抗世界的故事？成年人的思绪总是围绕非常有限的东西不停旋转，比如爱情。<br><br>
+                        第十一章：阿西莫夫的理论中透露出和刘慈欣一样的自大和傲慢，并且用情感和人物心理活动掩饰其中的逻辑漏洞，没有特德姜那种细腻感。<br><br>
+                        第十二章：这种由果推因的做法构成的闭环挺奇妙的，也许永恒时空里也有个计算师在编排我的人生？<br><br>
+                        第十四章：啰嗦且莫名其妙。<br><br>
+                        第十五章：人物的情绪一会高涨一会低沉，情节生硬的转折着，都变了个人似的。<br><br>
+                        最后两章的反转加分，有点理解为什么会有"朝闻道，夕死可矣"的感慨。感觉《黑镜》，《弥留之国的爱丽丝》都受到了这本书的影响。<br><br>
+                        所以，我们现在的现实是诺依创造的？<br><br>
+
+                        <div style="padding: 8px 15px; margin: 15px 0;">
+                            <span style="font-size: 18px;">摘录</span>
+                        </div>
+
+                        <div class="quote" style="line-height: 2; font-weight: normal;">
+                            "亲手写下的字句，永远也不可能被抹去。"<br><br>
+                            "这种双重否定句能当借口吗，小子？"<br><br>
+                            "如果他必须因此孤独前行，那他也有资格以孤独为傲。"<br><br>
+                            "这种态度是你的招牌。"<br><br>
+                            "蓝色代表天真空灵，亮黄代表开怀大笑，紫色代表悲伤，而猩红色则代表激情。"<br><br>
+                            "只要抓紧手里的麻秆儿，它也会成为痛击敌人的铁棍。"<br><br>
+                            "永恒之人觉得什么是幸福？好吧，我告诉你答案——安全和安逸，中庸之道，永远不要激进。如果没有百分之百确定的优厚回报，绝对不要冒险。"<br><br>
+                            "在消弭人类灾难痛苦的同时，永恒时空也消除了人类走向辉煌的可能。只有经过严酷的考验，人类才能不断前进，走向发展的高峰。危险的环境和危机感，才是驱使人类不断进步，不断征服新事物的根本动力。你能理解吗？你能否理解，在消除人类生活中时时伴随的陷阱和苦痛的同时，永恒时空剥夺了人类自我发展、自我寻求克服困难的答案的权利？要知道，要想取得进步、持续发展，要紧的不是避免困难的出现，而是战胜困难，你明白吗？"<br><br>
+                            "你们会嘲笑一般时空住民的无知，因为他们以为世上只有一种现实。我会嘲笑永恒之人的无知，因为你们虽然知道有无数种现实，却以为只有一种能够实现。"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加2024-10书籍的模态框 -->
+            <div id="bookModal2024_10" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2024_10()">&times;</span>
+                    <div class="modal-title">《索拉里斯星-波兰-斯坦尼斯瓦夫·莱姆 (Stanisław Lem)》</div>
+                    <div class="modal-date">2024-12-28</div>
+                    <div class="modal-text">
+                        80/443：就是一种在看《异形》的感觉，一种发高烧时的恍惚感，镍铁地板，刺眼的白炽灯和环境背景中的那种高频电流声。<br><br>
+                        118/443: 非常经典的太空题材恐怖片桥段和分手描写。<br><br>
+                        202/443:作者理解什么是真正的恐惧。<br><br>
+                        112：电光般的蓝色，无生命的蓝色，很痴迷于作者对太阳光颜色的描写，因为之前到川西高原出差，最令我难忘，却又不知如何描述的就是高原诡异的阳光。<br><br>
+                        116：男主的对话很符合他心理学家的身份，总是引导式对话，不透露自己，让对方阐述。<br><br>
+                        138: 作者是充满想象力的，那种几页长的段落，对索拉里斯星的描绘是很伟大的想象力。<br><br>
+                        185:人是万物的尺度，但是用人的思维、情感方式我们可能永远无法理解索拉里斯。<br><br>
+                        236：这世上最大的刑罚就是让你爱上一个人吧。<br><br>
+                        248：一切的理智只是他再次失去哈丽后的癫狂。作者很擅长"一切尽在不言中"。<br><br>
+                        End：一种从未有过的阅读体验，莱姆是一位诗人。<br><br>
+
+                        <div style="padding: 8px 15px; margin: 15px 0;">
+                            <span style="font-size: 18px;">摘录</span>
+                        </div>
+
+                        <div class="quote" style="line-height: 2; font-weight: normal;">
+                            "我们飞向太空，做好了一切准备，也就是说，准备好承受孤独，准备好艰苦工作，准备好自我牺牲，准备好面对死亡。出于谦虚，我们不会大声宣扬，但有时我们的确会想，我们自己很了不起。而与此同时，我们并不想征服宇宙，我们只想尽可能地拓展地球的边界。对我们来说，有的星球就像撒哈拉大沙漠一样炎热干燥，还有的星球就像南北极一样冰雪覆盖，或是像巴西的丛林，一幅热带景象。我们奉行人道主义，有着崇高的理想。我们没有征服其他种族的打算，而是只想向他们传授我们的价值观，并吸取他们的文明传统作为回报。我们把自己看作'神圣接触的骑士'。而这又是一个谎言。我们寻找的是人，而不是任何其他东西。我们不需要其他世界。我们需要的是镜子。我们不知道该拿其他世界来做什么。一个世界对我们来说就已经足够了，它已经足以让我们感到窒息。我们渴望找到自己理想化的形象：它们必须是比我们的地球更完美的地球，比我们的文明更完美的文明。我们期望在其他世界身上找到我们自己原始过去的影子。与此同时，有些另一面的东西我们却拒绝承认，拼命辩驳。归根结底，我们从地球上带来的并不仅仅是美德的精华，并不仅仅是人类的英雄典范！我们来到这里，带来的是我们真正的自我，而当对方向我们展示出事实真相时，也就是我们闭口不谈的那部分，我们便无法接受这一现实！"<br><br>
+                            "我们想要的东西：和另一种文明的接触。这种接触我们现在已经有了！那就是我们自己怪物般的丑陋，我们自己滑稽的丑态和深深的耻辱，就像在显微镜下一样一览无余！"<br><br>
+                            "每一门科学都有其相应的伪科学，由某种特殊类型的头脑所产生的怪诞扭曲形式，天文学有占星术这一滑稽模仿的伴侣，而化学则曾经有过炼金术。"<br><br>
+                            "一个人只能同时留意很少的几样东西，我们只能看到此时此刻发生在我们眼前的事情。如果要想象多个同时进行的过程，不管它们如何密切相关，如何相辅相成，都是我们力所不及的。即使是在相对简单的现象面前，我们也有这样的体验。"<br><br>
+                            "但是我们父母的初衷，不管它们之间有多大的不同，与我们又有何相干呢？你可以说我们的将来取决于他们的初衷，这一点我同意。我不能预测将来会发生什么事情，你也同样不能。我甚至不能向你保证我将永远爱你。既然已经发生了这么多事情，那么任何事情都有可能发生。说不定明天我就会变成一只绿色的水母，这不是我所能决定的。但是在我们自己能够决定的事情当中，我们将永不分离。这难道还不够吗？"<br><br>
+                            "你不仅是在欺骗自己，而且你也在欺骗她，然后又回过头来欺骗你自己。"<br><br>
+                            "索拉里斯学是早已死亡的神话留下的遗腹子，是人们如今已没有勇气大声宣扬的神秘渴望所绽放出的最后一枝花朵，而埋藏在这座大厦地基深处的奠基石则是对救赎的渴望……"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">2021</h2>
+            <hr class="divider">
+            <div class="book-grid">
+                <div class="book-placeholder"><img src="images/20211.jpg" alt="20211" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20212.jpg" alt="20212" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20213.jpg" alt="20213" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20214.jpg" alt="20214" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20215.jpg" alt="20215" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20216.jpg" alt="20216" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20217.jpg" alt="20217" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20218.jpg" alt="20218" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20219.jpg" alt="20219" class="book-cover"></div>
+            </div>
+
+            <h2 class="section-title">2020</h2>
+            <hr class="divider">
+            <div class="book-grid">
+                <div class="book-placeholder"><img src="images/20201.jpg" alt="20201" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20202.jpg" alt="20202" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20203.jpg" alt="20203" class="book-cover"></div>
+                <div class="book-placeholder"><img src="images/20204.jpg" alt="20204" class="book-cover"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleYear(element) {
+            element.classList.toggle('collapsed');
+            const content = element.nextElementSibling;
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function openModal() {
+            document.getElementById('bookModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('bookModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_1() {
+            document.getElementById('bookModal2024_1').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_1() {
+            document.getElementById('bookModal2024_1').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_2() {
+            document.getElementById('bookModal2024_2').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_2() {
+            document.getElementById('bookModal2024_2').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_3() {
+            document.getElementById('bookModal2024_3').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_3() {
+            document.getElementById('bookModal2024_3').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_4() {
+            document.getElementById('bookModal2024_4').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_4() {
+            document.getElementById('bookModal2024_4').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_5() {
+            document.getElementById('bookModal2024_5').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_5() {
+            document.getElementById('bookModal2024_5').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_8() {
+            document.getElementById('bookModal2024_8').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_8() {
+            document.getElementById('bookModal2024_8').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_6() {
+            document.getElementById('bookModal2024_6').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_6() {
+            document.getElementById('bookModal2024_6').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_7() {
+            document.getElementById('bookModal2024_7').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_7() {
+            document.getElementById('bookModal2024_7').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_9() {
+            document.getElementById('bookModal2024_9').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_9() {
+            document.getElementById('bookModal2024_9').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openModal2024_10() {
+            document.getElementById('bookModal2024_10').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2024_10() {
+            document.getElementById('bookModal2024_10').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // 更新点击模态框外部关闭的函数
+        window.onclick = function(event) {
+            let modal1 = document.getElementById('bookModal');
+            let modal2 = document.getElementById('bookModal2024_1');
+            let modal3 = document.getElementById('bookModal2024_2');
+            let modal4 = document.getElementById('bookModal2024_3');
+            let modal5 = document.getElementById('bookModal2024_4');
+            let modal6 = document.getElementById('bookModal2024_5');
+            let modal7 = document.getElementById('bookModal2024_6');
+            let modal8 = document.getElementById('bookModal2024_7');
+            let modal9 = document.getElementById('bookModal2024_8');
+            let modal10 = document.getElementById('bookModal2024_9');
+            let modal11 = document.getElementById('bookModal2024_10');
+            
+            if (event.target == modal1) {
+                closeModal();
+            }
+            if (event.target == modal2) {
+                closeModal2024_1();
+            }
+            if (event.target == modal3) {
+                closeModal2024_2();
+            }
+            if (event.target == modal4) {
+                closeModal2024_3();
+            }
+            if (event.target == modal5) {
+                closeModal2024_4();
+            }
+            if (event.target == modal6) {
+                closeModal2024_5();
+            }
+            if (event.target == modal7) {
+                closeModal2024_6();
+            }
+            if (event.target == modal8) {
+                closeModal2024_7();
+            }
+            if (event.target == modal9) {
+                closeModal2024_8();
+            }
+            if (event.target == modal10) {
+                closeModal2024_9();
+            }
+            if (event.target == modal11) {
+                closeModal2024_10();
+            }
+        }
+    </script>
+</body>
+</html> 

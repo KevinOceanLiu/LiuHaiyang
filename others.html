@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiuHaiyang - Others</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/profile.png">
+    <style>
+        /* 复制index.html的所有样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white !important;
+        }
+
+        .container {
+            background-color: white !important;
+            margin-top: 0;
+            padding-top: 0;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            border: none !important;
+            background-color: #6BC49C !important;
+            min-height: 100vh;
+            width: 200px;
+            position: sticky;
+            top: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0 20px;
+            margin-left: 20px;
+            padding-top: 0;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #6BC49C;
+        }
+
+        .profile-name .en {
+            font-family: Arial, sans-serif;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .profile-name .cn {
+            font-family: "PingFang SC", "PingFang TC", sans-serif;
+            display: block;
+            font-weight: bold;
+        }
+
+        .profile-section {
+            border: none !important;
+            background-color: #6BC49C !important;
+        }
+
+        .profile-links {
+            border-top: none !important;
+            background-color: #6BC49C !important;
+            padding-left: 15px;
+        }
+
+        .link-item {
+            background-color: #6BC49C !important;
+            text-align: left;
+            padding: 8px 0;
+        }
+
+        .link-item span {
+            display: inline-block;
+            min-width: 60px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .link-item:hover {
+            text-decoration: underline;
+        }
+
+        .link-item:hover span {
+            text-decoration: underline;
+        }
+
+        /* 修改路径栏样式 */
+        .path-nav {
+            color: #666666;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
+            margin-bottom: 0;
+            margin-left: -20px;
+        }
+
+        /* 修改卡片容器样式 */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        /* 修改卡片样式为苹果风格 */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 0;
+            text-decoration: none;
+            color: #666666;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 20px;
+            color: black;
+            font-weight: normal;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 16px;
+            color: #666666;
+            line-height: 1.5;  /* 更好的行高 */
+        }
+
+        /* 添加卡片图片样式 */
+        .card img {
+            max-width: 80%;  /* 图片最大宽度 */
+            max-height: 80%;  /* 图片最大高度 */
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* 修改背景图片样式 */
+        .book-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 0;
+        }
+
+        .book-background img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            opacity: 1;  /* 完全不透明 */
+        }
+
+        /* 添加图标样式 */
+        .icon {
+            width: 16px;  /* 设置图标宽度 */
+            height: auto;  /* 高度自动调整以保持比例 */
+            vertical-align: middle;  /* 垂直居中对齐 */
+            margin-right: 8px;  /* 图标与文本之间的间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="images/profile.png" alt="Profile">
+                </div>
+                <div class="profile-name">
+                    <span class="en">LiuHaiyang</span>
+                    <span class="cn">刘海洋</span>
+                </div>
+            </div>
+            <div class="profile-links">
+                <a href="mailto:15035689055liuhaiyang@gmail.com" class="link-item">
+                    <img src="images/mail.png" alt="Email" class="icon">
+                    <span>Email</span>
+                </a>
+                <a href="https://orcid.org/0009-0009-8701-0538" class="link-item">
+                    <img src="images/id.png" alt="ORCiD" class="icon">
+                    <span>ORCiD</span>
+                </a>
+                <a href="https://maps.app.goo.gl/EEunaQVkdbAjMVaL8" class="link-item">
+                    <img src="images/location.png" alt="Location" class="icon">
+                    <span>Location</span>
+                </a>
+                <div style="height: 20px;"></div>
+                <a href="index.html" class="link-item">
+                    <img src="images/academic.png" alt="Academic" class="icon">
+                    <span>Academic</span>
+                </a>
+                <a href="others.html" class="link-item active">
+                    <img src="images/others.png" alt="Others" class="icon">
+                    <span>Others</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="path-nav">/ Others</div>
+            <div class="cards-container">
+                <a href="oceanstation.html" class="card">
+                    <img src="images/OceanStation-logo.png" alt="OceanStation">
+                </a>
+                <a href="books.html" class="card">
+                    <div class="book-background">
+                        <img src="images/book.png" alt="Book Icon">
+                    </div>
+                </a>
+                <a href="clustrmap.html" class="card">
+                    <div class="book-background">
+                        <img src="images/map.png" alt="Map Icon">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

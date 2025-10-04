@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiuHaiyang - Academic</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/profile.png">
+    <style>
+        /* 添加全局字体和背景色 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white !important;
+        }
+
+        /* 修改容器样式 */
+        .container {
+            background-color: white !important;
+            margin-top: 0;
+            padding-top: 0;
+            min-height: 100vh;
+            display: flex;  /* 使用flex布局 */
+        }
+
+        /* 修改侧边栏样式 */
+        .sidebar {
+            border: none !important;
+            background-color: #6BC49C !important;
+            min-height: 100vh;
+            width: 200px;  /* 将宽度从250px减小到200px */
+            position: sticky;  /* 使用sticky定位 */
+            top: 0;  /* 固定在顶部 */
+        }
+
+        /* 修改主内容区域样式 */
+        .main-content {
+            flex: 1;  /* 占据剩余空间 */
+            padding: 0 20px;  /* 添加左右内边距 */
+            margin-left: 20px;  /* 与侧边栏保持间距 */
+            padding-top: 0;  /* 移除顶部内边距 */
+        }
+
+        /* 确保问候语直接位于内容区域顶部 */
+        .greeting {
+            margin-top: 20px;  /* 添加顶部边距 */
+            padding-top: 20px;
+        }
+
+        /* 添加内容文本的颜色样式 */
+        .main-content, .education-period {
+            color: #000;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        
+        /* 修改标题样式 */
+        .section-title {
+            color: #6BC49C;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 40px 0 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 添加导师链接的颜色样式 */
+        .supervisor-link {
+            color: #3478F6; /* 新的蓝色 */
+            text-decoration: none; /* 移除下划线 */
+        }
+
+        .supervisor-link:hover {
+            text-decoration: underline; /* 鼠标悬停时显示下划线 */
+        }
+
+        /* 修改个人名称样式 */
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #6BC49C;
+        }
+
+        .profile-name .en {
+            font-family: Arial, sans-serif;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .profile-name .cn {
+            font-family: "PingFang SC", "PingFang TC", sans-serif;
+            display: block;
+            font-weight: bold;
+        }
+
+        /* 修改导航菜单样式 */
+        .nav-links a {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            border-bottom: none;
+            color: #666666;  /* 与其他链接保持一致的颜色 */
+            text-decoration: none;
+        }
+        
+        .nav-links a.active {
+            color: #4A9EEA;  /* 当前页面链接的颜色 */
+        }
+
+        /* 移除侧边栏和个人资料区域的边框 */
+        .sidebar {
+            border: none !important;
+        }
+
+        .profile-section {
+            border: none !important;
+            background-color: #6BC49C !important;
+        }
+
+        /* 修改个人资料链接样式 */
+        .profile-links {
+            border-top: none !important;
+            background-color: #6BC49C !important;
+            padding-left: 15px;  /* 稍微减小左侧内边距 */
+        }
+
+        /* 确保链接项也是白色背景 */
+        .link-item {
+            background-color: #6BC49C !important;
+            text-align: left;  /* 文字左对齐 */
+            padding: 8px 0;  /* 保持上下内边距 */
+            text-decoration: none;  /* 默认无下划线 */
+        }
+
+        /* 添加与 supervisor-link 相同的悬停效果 */
+        .link-item:hover {
+            text-decoration: underline;  /* 鼠标悬停时显示下划线 */
+        }
+
+        /* 确保链接文本不会被图标的样式影响 */
+        .link-item span {
+            display: inline-block;
+            min-width: 60px;
+            text-decoration: none;  /* 默认无下划线 */
+        }
+
+        .link-item:hover span {
+            text-decoration: underline;  /* 鼠标悬停时显示下划线 */
+        }
+
+        /* 修改问候语样式 */
+        .greeting {
+            font-size: 16px;
+            font-weight: normal;
+            color: #000;
+            font-style: italic;
+            -webkit-text-fill-color: #000;
+            text-align: center;
+            border: none !important;
+            background-color: transparent !important;
+            padding: 0 !important;
+            margin: 20px 0;
+            box-shadow: none !important;
+            /* 移除动画 */
+            animation: none !important;
+        }
+
+        /* 定义动画关键帧 */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 移除悬浮效果 */
+        .greeting:hover {
+            transform: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            background-color: transparent !important;
+            filter: none !important;  /* 移除任何滤镜效果 */
+        }
+
+        /* 确保问候语容器也没有阴影 */
+        .greeting-container {
+            box-shadow: none !important;
+            background: none !important;
+        }
+
+        /* 自定义滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;  /* 滚动条宽度 */
+            background-color: white;  /* 滚动条背景色 */
+        }
+
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            background-color: #CCCCCC;  /* 更浅的灰色 */
+            border-radius: 4px;  /* 圆角 */
+        }
+
+        /* 移除滚动条轨道的边框 */
+        ::-webkit-scrollbar-track {
+            background-color: white;  /* 白色背景 */
+            border: none;  /* 移除边框 */
+        }
+
+        /* 确保整个页面背景为白色 */
+        html {
+            background-color: white;
+            scrollbar-color: #CCCCCC white;  /* Firefox的滚动条颜色也改为浅灰色 */
+            scrollbar-width: thin;  /* Firefox的滚动条宽度 */
+        }
+
+        /* 添加全局背景色 */
+        body, html {
+            background-color: white !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* 确保body和html至少和视窗一样高 */
+        }
+
+        /* 添加列表项的样式 */
+        .list-item {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        /* 添加教育经历标题样式 */
+        .education-title {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        /* 添加教育经历详情样式 */
+        .education-details {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        /* 添加出版物条目样式 */
+        .publication-item {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        /* 修改专业软件分类标签样式 */
+        .software-category {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        /* 修改链接项文本样式 */
+        .link-item span {
+            display: inline-block;
+            min-width: 60px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        /* 修改列表项目符号的颜色 */
+        ul {
+            list-style-type: disc;  /* 使用实心圆点 */
+            color: #000;  /* 设置为黑色，与内容文本颜色一致 */
+        }
+
+        /* 确保列表项文本颜色不受父元素影响 */
+        ul li {
+            color: #000;
+        }
+
+        /* 修改列表样式 */
+        .list-unstyled {
+            list-style: none;  /* 移除默认项目符号 */
+            padding-left: 0;   /* 移除默认内边距 */
+        }
+
+        .list-unstyled li {
+            position: relative;
+            padding-left: 20px;  /* 为自定义项目符号留出空间 */
+        }
+
+        .list-unstyled li:before {
+            content: "•";  /* 添加自定义项目符号 */
+            color: #000;  /* 设置项目符号颜色为黑色 */
+            position: absolute;
+            left: 5px;
+        }
+
+        /* 修改 Research interests 列表样式 */
+        .interests-list {
+            list-style: none;  /* 移除默认项目符号 */
+            padding-left: 0;   /* 移除默认内边距 */
+        }
+
+        .interests-list li {
+            position: relative;
+            padding-left: 20px;  /* 为自定义项目符号留出空间 */
+        }
+
+        .interests-list li:before {
+            content: "•";  /* 添加自定义项目符号 */
+            color: #000;  /* 设置项目符号颜色为黑色 */
+            position: absolute;
+            left: 5px;
+        }
+
+        /* 修改路径栏样式 */
+        .path-nav {
+            color: #000;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            padding: 10px 20px;  /* 减小上下内边距为10px，保持左右内边距为20px */
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 100;
+            margin-bottom: 0;
+            margin-left: -20px;  /* 保持与内容区域对齐 */
+        }
+
+        /* 添加图标样式 */
+        .icon {
+            width: 16px;  /* 设置图标宽度 */
+            height: auto;  /* 高度自动调整以保持比例 */
+            vertical-align: middle;  /* 垂直居中对齐 */
+            margin-right: 8px;  /* 图标与文本之间的间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="images/profile.png" alt="Profile">
+                </div>
+                <div class="profile-name">
+                    <span class="en">LiuHaiyang</span>
+                    <span class="cn">刘海洋</span>
+                </div>
+            </div>
+            <div class="profile-links">
+                <a href="mailto:15035689055liuhaiyang@gmail.com" class="link-item">
+                    <img src="images/mail.png" alt="Email" class="icon">
+                    <span>Email</span>
+                </a>
+                <a href="https://orcid.org/0009-0009-8701-0538" class="link-item">
+                    <img src="images/id.png" alt="ORCiD" class="icon">
+                    <span>ORCiD</span>
+                </a>
+                <a href="https://maps.app.goo.gl/8UxRNrFbq7MmbCFM7" class="link-item">
+                    <img src="images/location.png" alt="Location" class="icon">
+                    <span>Location</span>
+                </a>
+                <div style="height: 20px;"></div>
+                <a href="index.html" class="link-item active">
+                    <img src="images/academic.png" alt="Academic" class="icon">
+                    <span>Academic</span>
+                </a>
+                <a href="others.html" class="link-item">
+                    <img src="images/others.png" alt="Others" class="icon">
+                    <span>Others</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="path-nav">/ Academic</div>
+            <div class="greeting" style="font-size:16px;font-style:italic;font-weight:normal;color:#000;text-align:center;margin:20px 0;padding:0;box-shadow:none;border:none;background:transparent;">
+                Hey there! This is a personal public webpage that is continually being improved. I am Liu Haiyang from Henan Province, China, and you can call me Ocean!<br>Done is better than Perfect!
+            </div>
+
+            <h2 class="section-title">Research interests</h2>
+            <hr class="divider">
+            <ul class="interests-list">
+                <li class="list-item">Landscape Ecology</li>
+                <li class="list-item">Ecosystem Assessment</li>
+                <li class="list-item">Remote sensing</li>
+                <li class="list-item">Spatial Theory and Methods</li>
+            </ul>
+
+            <h2 class="section-title">Education background & work experience</h2>
+            <hr class="divider">
+            <div class="education-item" style="display: flex; align-items: center; margin-bottom: 16px;">
+                <img src="images/SXU.png" alt="SXU Logo" style="width:60px;height:auto;margin-right:16px;">
+                <div>
+                    <div class="education-title">B.S.</div>
+                    <div class="education-period">2015/09-2019/06</div>
+                    <div class="education-details">Shanxi University, Taiyuan / School of Environment and Resources / Physical Geography and Resource Environment</div>
+                </div>
+            </div>
+            <hr class="divider" style="margin-left:76px;">
+            <div class="education-item" style="display: flex; align-items: center; margin-bottom: 16px;">
+                <img src="images/UCAS.png" alt="UCAS Logo" style="width:60px;height:auto;margin-right:16px;">
+                <div>
+                    <div class="education-title">M.S.</div>
+                    <div class="education-period">2020/09-2023/06</div>
+                    <div class="education-details">University of Chinese Academy of Sciences, Beijing, Chengdu / Chengdu Institute of Biology / Biology and Medicine (Landscape Ecology and Restoration Ecology)</div>
+                    <div class="education-details">Project: Vegetation Landscape Restoration Dynamics and Ecological Effects in the Dagou Basin, Maoxian County, Sichuan Province.</div>
+                    <div class="education-details">Supervisor: <a href="https://cib.cas.cn/sourcedb/zw/rck/200908/t20090821_2431079.html" class="supervisor-link">Bao Weikai</a></div>
+                </div>
+            </div>
+            <hr class="divider" style="margin-left:76px;">
+            <div class="education-item" style="display: flex; align-items: center; margin-bottom: 16px;">
+                <img src="images/PolyU.png" alt="PolyU Logo" style="width:60px;height:auto;margin-right:16px;">
+                <div>
+                    <div class="education-title">RA</div>
+                    <div class="education-period">2024/07-2025/03</div>
+                    <div class="education-details">Research Assistant of The Hong Kong Polytechnic University, Shenzhen / Shenzhen Research Institute.</div>
+                    <div class="education-details">Curtin University Geospatial Intelligence Lab member.</div>
+                    <div class="education-details">Projects:</div>
+                    <ul class="list-unstyled">
+                        <li class="list-item">Degree of Spatial Interpretability (DSI).</li>
+                        <li class="list-item">Degree of geocomplexity for spatial validation (DG).</li>
+                        <li class="list-item">Local effects of pattern interaction.</li>
+                        <li class="list-item">Generalized spatial error for validation (GSE).</li>
+                    </ul>
+                    <div class="education-details">Supervisor: <a href="https://yongzesong.com/" class="supervisor-link">Song Yongze</a></div>
+                </div>
+            </div>
+            <hr class="divider" style="margin-left:76px;">
+            <div class="education-item" style="display: flex; align-items: center; margin-bottom: 16px;">
+                <img src="images/HokkaidoU.png" alt="HokkaidoU Logo" style="width:60px;height:auto;margin-right:16px;">
+                <div>
+                    <div class="education-title">Ph.D.</div>
+                    <div class="education-period">2025/04-2028/04</div>
+                    <div class="education-details">Hokkaido University, Sapporo, Nayoro / Graduate School of Environmental Science / Forest Field Science.</div>
+                    <div class="education-details">Projects: Development of Optimal Ecosystem Management Methods Following the Flowering of Dwarf Bamboo in Hokkaido.</div>
+                    <div class="education-details">Supervisor: <a href="https://www.researchgate.net/profile/Satoshi-Suzuki-7" class="supervisor-link">Satoshi Suzuki</a></div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Publications</h2>
+            <hr class="divider">
+            <ul class="list-unstyled">
+                <li class="publication-item">Forty⁃two⁃year dynamics of vegetation landscape restoration pattern and its characteristics in Dagou basin, Maoxian County, Sichuan Province [J]. Acta Ecologica Sinica, 2024, 44 (09): 3708-3720.</li>
+                <li class="publication-item">Dynamics of Vegetation Landscape Restoration and Its Ecological Effects [J]. Journal of West China Forestry Science, 2022, 51 (06): 140-145.</li>
+            </ul>
+
+            <h2 class="section-title">Academic conference</h2>
+            <hr class="divider">
+            <ul class="list-unstyled">
+                <li class="publication-item">Effects of Sasa mass-flowering and dieback on forest tree regeneration: Preliminary results from a seedling survey (2024-2025) in the Nakagawa Experimental Forest. Poster presented at the JaLTER Open Science Meeting 2025 (JaLTER-OSM), Nakagawa, Hokkaido, Japan, October 7-8, 2025. <a href="files/1.pdf" class="supervisor-link">/poster/</a></li>
+            </ul>
+
+            <h2 class="section-title">Research experience</h2>
+            <hr class="divider">
+            <div class="education-item">
+                <div class="education-period">09/2016-09/2018</div>
+                <div class="education-title">Project: Exploration of Forest Fire Monitoring Methods Based on MODIS and ETM+ Remote Sensing Data.</div>
+                <div class="education-details">Main research content: Calculation of NDVI (Normalized Difference Vegetation Index) and NBR (Normalized Burn Ratio); construct fire point index through brightness temperature.</div>
+                <div class="education-details">Responsibilities: This is a scientific research training project. I completed the project as the captain of a three-member research team, mainly responsible for data processing and article writing. In the end, the project won the sixth place in the college's research training competition.</div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-period">09/2020-12/2021</div>
+                <div class="education-title">Project: (1) Research on the spatial pattern and genesis of alpine pines. (2) Second Tibetan Plateau Scientific Expedition Program.</div>
+                <div class="education-details">Responsibilities: I participated as an assistant in the field data survey for both projects. I was mainly responsible for vegetation surveys (surveying plant species, biomass and other basic information) and soil sampling and processing.</div>
+            </div>
+
+            <h2 class="section-title">Technical Skills</h2>
+            <hr class="divider">
+            <ul class="list-unstyled">
+                <li class="list-item"><span class="software-category">GIS:</span> ENVI / ArcGIS / QGIS / GEE / GeoDa</li>
+                <li class="list-item"><span class="software-category">Data Analysis:</span> SPSS</li>
+                <li class="list-item"><span class="software-category">Ecology:</span> Fragstats</li>
+                <li class="list-item"><span class="software-category">Code:</span> R</li>
+            </ul>
+
+            <h2 class="section-title">Professional Service</h2>
+            <hr class="divider">
+            <div class="education-item">
+                <div class="education-details">Peer Reviewer:</div>
+                <ul class="list-unstyled" style="margin-bottom:0;">
+                    <li class="list-item">International Journal of Applied Earth Observation and Geoinformation (Q1)</li>
+                    <li class="list-item">All Earth (Q2)</li>
+                    <li class="list-item">GIScience & Remote Sensing (Q2)</li>
+                </ul>
+                <div class="education-details">Membership:</div>
+                <ul class="list-unstyled" style="margin-bottom:0;">
+                    <li class="list-item"><a href="https://yongzesong.com/geospatial-intelligence-lab/" class="supervisor-link">Geospatial Intelligence Lab</a>, Curtin University (2024 - Present).</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Awards & Certificates</h2>
+            <hr class="divider">
+            <ul class="list-unstyled">
+                <li class="list-item">Hokkaido University EXEX Doctoral Fellowship (2025-2028)</li>
+                <li class="list-item">Full Tuition Waiver (PhD, First Semester, 2025)</li>
+                <li class="list-item">JASSO Scholarship for Privately-Financed International Students (2025.5-2026.5)</li>
+                <li class="list-item">Outstanding Communist Party Member, Chengdu Institute of Biology, Chinese Academy of Sciences (2023)</li>
+                <li class="list-item">Outstanding Student Award, Chengdu Institute of Biology, Chinese Academy of Sciences (2023)</li>
+                <li class="list-item">Excellence Award in the National University of Science and Technology Translation Contest (2022)</li>
+                <li class="list-item">Outstanding Youth League Member, School of Environment and Resources, Shanxi University (2017-2018)</li>
+                <li class="list-item">Scholarship for the Second Year of Studies, School of Environment and Resources, Shanxi University (2017)</li>
+                <li class="list-item">Driver's License (Chinese C1)</li>
+            </ul>
+
+            <h2 class="section-title">Language</h2>
+            <hr class="divider">
+            <ul class="list-unstyled">
+                <li class="list-item">Chinese (Native language)</li>
+                <li class="list-item">English (Fluent)</li>
+                <li class="list-item">Japanese (Beginner)</li>
+            </ul>
+
+            <div style="height: 40px;"></div>
+        </div>
+    </div>
+</body>
+</html> 
