@@ -332,6 +332,15 @@
             vertical-align: middle;  /* 垂直居中对齐 */
             margin-right: 8px;  /* 图标与文本之间的间距 */
         }
+
+        /* 移除带图片的文献条目的项目符号和内边距 */
+        .publication-item[style*="display: flex"] {
+            padding-left: 0 !important;
+        }
+
+        .publication-item[style*="display: flex"]:before {
+            content: none !important;
+        }
     </style>
 </head>
 <body>
@@ -439,8 +448,14 @@
             <h2 class="section-title">Publications</h2>
             <hr class="divider">
             <ul class="list-unstyled">
-                <li class="publication-item">Forty⁃two⁃year dynamics of vegetation landscape restoration pattern and its characteristics in Dagou basin, Maoxian County, Sichuan Province [J]. Acta Ecologica Sinica, 2024, 44 (09): 3708-3720.</li>
-                <li class="publication-item">Dynamics of Vegetation Landscape Restoration and Its Ecological Effects [J]. Journal of West China Forestry Science, 2022, 51 (06): 140-145.</li>
+                <li class="publication-item" style="display: flex; align-items: center; margin-bottom: 16px; padding-left: 0;">
+                    <img src="images/paper1.png" alt="Paper 1" style="width:60px;height:auto;margin-right:16px;">
+                    <div>Forty⁃two⁃year dynamics of vegetation landscape restoration pattern and its characteristics in Dagou basin, Maoxian County, Sichuan Province [J]. Acta Ecologica Sinica, 2024, 44 (09): 3708-3720.</div>
+                </li>
+                <li class="publication-item" style="display: flex; align-items: center; margin-bottom: 16px; padding-left: 0;">
+                    <img src="images/paper2.png" alt="Paper 2" style="width:60px;height:auto;margin-right:16px;">
+                    <div>Dynamics of Vegetation Landscape Restoration and Its Ecological Effects [J]. Journal of West China Forestry Science, 2022, 51 (06): 140-145.</div>
+                </li>
             </ul>
 
             <h2 class="section-title">Academic conference</h2>
