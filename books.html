@@ -367,6 +367,10 @@
                 <div class="book-placeholder">
                     <img src="images/20252.jpg" alt="2025新图片" class="book-cover">
                 </div>
+                <div class="book-placeholder">
+                    <img src="images/20253.jpg" alt="厨房" class="book-cover" onclick="openModal2025_3()">
+                    <span class="note-icon">✒️</span>
+                </div>
             </div>
             
             <!-- 添加模态框 -->
@@ -406,6 +410,19 @@
                             "很难说这忧郁到底是哪里来的，有时它就笼罩在我们身上，像是一只大型掠食性的鸟的阴影。我不觉得赫拉不快乐，因为我前所未有地攀附着她。但也许她感觉到，有一些时候，我的攀附似乎太急于博取信任，当然也就不会长久。"<br><br>
                             "有一些女人已经忘记当一个女人不一定得蒙羞，不是只有痛苦。我还没有忘记。"
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 添加2025-3书籍的模态框 -->
+            <div id="bookModal2025_3" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal2025_3()">&times;</span>
+                    <div class="modal-title">《厨房[日]吉本芭娜娜》</div>
+                    <div class="modal-date">20251103</div>
+                    <div class="modal-text">
+                        p100：文笔很烂，翻译得很差，没有情节可言，故事单薄的令人心痛。越来越不懂日式浪漫。<br><br>
+                        p134:情节的生硬表现在1，莫名其妙的转折，作者常常在温馨时刻莫名其妙的突然使用截然相反的情景的词语来描写心情，比如夜送盖浇饭相遇是突然感到恐惧，离别和窒息。2，时常不能完整的描述人物的心情，通常一句两句带过，非常肤浅。3，能看的出作者的"无病呻吟"的性格特质，不是充满天赋的伤春悲秋。
                     </div>
                 </div>
             </div>
@@ -869,6 +886,16 @@
             document.body.style.overflow = 'auto';
         }
 
+        function openModal2025_3() {
+            document.getElementById('bookModal2025_3').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2025_3() {
+            document.getElementById('bookModal2025_3').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
         // 更新点击模态框外部关闭的函数
         window.onclick = function(event) {
             let modal1 = document.getElementById('bookModal');
@@ -882,6 +909,7 @@
             let modal9 = document.getElementById('bookModal2024_8');
             let modal10 = document.getElementById('bookModal2024_9');
             let modal11 = document.getElementById('bookModal2024_10');
+            let modal12 = document.getElementById('bookModal2025_3');
             
             if (event.target == modal1) {
                 closeModal();
@@ -915,6 +943,9 @@
             }
             if (event.target == modal11) {
                 closeModal2024_10();
+            }
+            if (event.target == modal12) {
+                closeModal2025_3();
             }
         }
     </script>
