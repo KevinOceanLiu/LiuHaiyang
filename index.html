@@ -47,7 +47,13 @@
         }
 
         /* 添加内容文本的颜色样式 */
-        .main-content, .education-period {
+        .main-content {
+            color: #000;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        
+        .education-period {
             color: #000;
             font-size: 16px;
             font-weight: normal;
@@ -235,7 +241,7 @@
         /* 添加教育经历标题样式 */
         .education-title {
             font-size: 16px;
-            font-weight: normal;
+            font-weight: bold;
         }
 
         /* 添加教育经历详情样式 */
@@ -339,6 +345,11 @@
         }
 
         .publication-item[style*="display: flex"]:before {
+            content: none !important;
+        }
+
+        /* 移除带padding-left: 0的文献条目的项目符号 */
+        .publication-item[style*="padding-left: 0"]:before {
             content: none !important;
         }
     </style>
@@ -448,13 +459,16 @@
             <h2 class="section-title">Publications</h2>
             <hr class="divider">
             <ul class="list-unstyled">
-                <li class="publication-item" style="display: flex; align-items: center; margin-bottom: 16px; padding-left: 0;">
-                    <img src="images/paper1.png" alt="Paper 1" style="width:60px;height:auto;margin-right:16px;">
-                    <div>Forty⁃two⁃year dynamics of vegetation landscape restoration pattern and its characteristics in Dagou basin, Maoxian County, Sichuan Province [J]. Acta Ecologica Sinica, 2024, 44 (09): 3708-3720.</div>
+                <li class="publication-item" style="margin-bottom: 16px; padding-left: 0;">
+                    <div style="font-size: 16px; color: #000; margin-bottom: 8px; font-weight: bold;">First author</div>
+                    <div style="display: flex; align-items: center;">
+                        <img src="images/paper1.png" alt="Paper 1" style="width:60px;height:auto;margin-right:16px;">
+                        <div>Liu H Y, Tang Y Y, Wang H J, Bao W K. Forty-two-year dynamics of vegetation landscape restoration pattern and its characteristics in Dagou basin, Maoxian County, Sichuan Province. Acta Ecologica Sinica, 2024, 44(9): 3708-3720.</div>
+                    </div>
                 </li>
                 <li class="publication-item" style="display: flex; align-items: center; margin-bottom: 16px; padding-left: 0;">
                     <img src="images/paper2.png" alt="Paper 2" style="width:60px;height:auto;margin-right:16px;">
-                    <div>Dynamics of Vegetation Landscape Restoration and Its Ecological Effects [J]. Journal of West China Forestry Science, 2022, 51 (06): 140-145.</div>
+                                            <div>Liu H Y, Bao W K. Dynamics of Vegetation Landscape Restoration and Its Ecological Effects [J]. Journal of West China Forestry Science, 2022, 51 (06): 140-145.</div>
                 </li>
             </ul>
 
@@ -467,15 +481,15 @@
             <h2 class="section-title">Research experience</h2>
             <hr class="divider">
             <div class="education-item">
-                <div class="education-period">09/2016-09/2018</div>
-                <div class="education-title">Project: Exploration of Forest Fire Monitoring Methods Based on MODIS and ETM+ Remote Sensing Data.</div>
+                <div class="education-period" style="font-weight: bold;">09/2016-09/2018</div>
+                <div class="education-title" style="font-weight: normal;">Project: Exploration of Forest Fire Monitoring Methods Based on MODIS and ETM+ Remote Sensing Data.</div>
                 <div class="education-details">Main research content: Calculation of NDVI (Normalized Difference Vegetation Index) and NBR (Normalized Burn Ratio); construct fire point index through brightness temperature.</div>
                 <div class="education-details">Responsibilities: This is a scientific research training project. I completed the project as the captain of a three-member research team, mainly responsible for data processing and article writing. In the end, the project won the sixth place in the college's research training competition.</div>
             </div>
 
             <div class="education-item">
-                <div class="education-period">09/2020-12/2021</div>
-                <div class="education-title">Project: (1) Research on the spatial pattern and genesis of alpine pines. (2) Second Tibetan Plateau Scientific Expedition Program.</div>
+                <div class="education-period" style="font-weight: bold;">09/2020-12/2021</div>
+                <div class="education-title" style="font-weight: normal;">Project: (1) Research on the spatial pattern and genesis of alpine pines. (2) Second Tibetan Plateau Scientific Expedition Program.</div>
                 <div class="education-details">Responsibilities: I participated as an assistant in the field data survey for both projects. I was mainly responsible for vegetation surveys (surveying plant species, biomass and other basic information) and soil sampling and processing.</div>
             </div>
 
@@ -491,13 +505,13 @@
             <h2 class="section-title">Professional Service</h2>
             <hr class="divider">
             <div class="education-item">
-                <div class="education-details">Peer Reviewer:</div>
+                <div class="education-details"><strong>Peer Reviewer:</strong></div>
                 <ul class="list-unstyled" style="margin-bottom:0;">
                     <li class="list-item">International Journal of Applied Earth Observation and Geoinformation (Q1)</li>
                     <li class="list-item">All Earth (Q2)</li>
                     <li class="list-item">GIScience & Remote Sensing (Q2)</li>
                 </ul>
-                <div class="education-details">Membership:</div>
+                <div class="education-details"><strong>Membership:</strong></div>
                 <ul class="list-unstyled" style="margin-bottom:0;">
                     <li class="list-item"><a href="https://yongzesong.com/geospatial-intelligence-lab/" class="supervisor-link">Geospatial Intelligence Lab</a>, Curtin University (2024 - Present).</li>
                 </ul>
