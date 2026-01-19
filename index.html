@@ -22,27 +22,27 @@
             display: flex;  /* 使用flex布局 */
         }
 
-        /* 修改侧边栏样式 */
+        /* 修改侧边栏样式 - 背景改为纯黑 */
         .sidebar {
             border: none !important;
-            background-color: #6BC49C !important;
+            background-color: #000000 !important; /* 修改：背景纯黑 */
             min-height: 100vh;
-            width: 200px;  /* 将宽度从250px减小到200px */
-            position: sticky;  /* 使用sticky定位 */
-            top: 0;  /* 固定在顶部 */
+            width: 200px;
+            position: sticky;
+            top: 0;
         }
 
         /* 修改主内容区域样式 */
         .main-content {
-            flex: 1;  /* 占据剩余空间 */
-            padding: 0 20px;  /* 添加左右内边距 */
-            margin-left: 20px;  /* 与侧边栏保持间距 */
-            padding-top: 0;  /* 移除顶部内边距 */
+            flex: 1;
+            padding: 0 20px;
+            margin-left: 20px;
+            padding-top: 0;
         }
 
         /* 确保问候语直接位于内容区域顶部 */
         .greeting {
-            margin-top: 20px;  /* 添加顶部边距 */
+            margin-top: 20px;
             padding-top: 20px;
         }
 
@@ -59,9 +59,9 @@
             font-weight: normal;
         }
         
-        /* 修改标题样式 */
+        /* 修改标题样式 - 颜色改为纯黑 */
         .section-title {
-            color: #6BC49C;
+            color: #000000; /* 修改：颜色纯黑 */
             font-size: 16px;
             font-weight: bold;
             margin: 40px 0 16px;
@@ -70,20 +70,21 @@
 
         /* 添加导师链接的颜色样式 */
         .supervisor-link {
-            color: #3478F6; /* 新的蓝色 */
-            text-decoration: none; /* 移除下划线 */
+            color: #3478F6;
+            text-decoration: none;
         }
 
         .supervisor-link:hover {
-            text-decoration: underline; /* 鼠标悬停时显示下划线 */
+            text-decoration: underline;
         }
 
-        /* 修改个人名称样式 */
+        /* 修改个人名称样式 - 背景纯黑，字体白色 */
         .profile-name {
             font-size: 16px;
             font-weight: bold;
             text-align: center;
-            background-color: #6BC49C;
+            background-color: #000000; /* 修改：背景纯黑 */
+            color: #FFFFFF; /* 修改：字体白色 */
         }
 
         .profile-name .en {
@@ -105,12 +106,12 @@
             font-size: 16px;
             font-weight: normal;
             border-bottom: none;
-            color: #666666;  /* 与其他链接保持一致的颜色 */
+            color: #666666;
             text-decoration: none;
         }
         
         .nav-links a.active {
-            color: #4A9EEA;  /* 当前页面链接的颜色 */
+            color: #4A9EEA;
         }
 
         /* 移除侧边栏和个人资料区域的边框 */
@@ -120,38 +121,43 @@
 
         .profile-section {
             border: none !important;
-            background-color: #6BC49C !important;
+            background-color: #000000 !important; /* 修改：背景纯黑 */
         }
 
-        /* 修改个人资料链接样式 */
+        /* 修改个人资料链接样式 - 背景纯黑 */
         .profile-links {
             border-top: none !important;
-            background-color: #6BC49C !important;
-            padding-left: 15px;  /* 稍微减小左侧内边距 */
+            background-color: #000000 !important; /* 修改：背景纯黑 */
+            padding-left: 15px;
         }
 
-        /* 确保链接项也是白色背景 */
+        /* 修改链接项 - 背景纯黑，字体白色 */
         .link-item {
-            background-color: #6BC49C !important;
-            text-align: left;  /* 文字左对齐 */
-            padding: 8px 0;  /* 保持上下内边距 */
-            text-decoration: none;  /* 默认无下划线 */
+            background-color: #000000 !important; /* 修改：背景纯黑 */
+            color: #FFFFFF !important; /* 修改：字体白色 */
+            text-align: left;
+            padding: 8px 0;
+            text-decoration: none;
+            display: block; /* 确保占满宽度 */
         }
 
         /* 添加与 supervisor-link 相同的悬停效果 */
         .link-item:hover {
-            text-decoration: underline;  /* 鼠标悬停时显示下划线 */
+            text-decoration: underline;
         }
 
-        /* 确保链接文本不会被图标的样式影响 */
+        /* 修改链接文本样式 */
         .link-item span {
             display: inline-block;
             min-width: 60px;
-            text-decoration: none;  /* 默认无下划线 */
+            text-decoration: none;
+            color: #FFFFFF; /* 修改：确保文字白色 */
+            font-size: 16px;
+            font-weight: normal;
         }
 
         .link-item:hover span {
-            text-decoration: underline;  /* 鼠标悬停时显示下划线 */
+            text-decoration: underline;
         }
 
         /* 修改问候语样式 */
@@ -167,21 +173,14 @@
             padding: 0 !important;
             margin: 20px 0;
             box-shadow: none !important;
-            /* 移除动画 */
             animation: none !important;
         }
 
         /* 定义动画关键帧 */
         @keyframes fadeInOut {
-            0% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         /* 移除悬浮效果 */
@@ -190,10 +189,9 @@
             box-shadow: none !important;
             border: none !important;
             background-color: transparent !important;
-            filter: none !important;  /* 移除任何滤镜效果 */
+            filter: none !important;
         }
 
-        /* 确保问候语容器也没有阴影 */
         .greeting-container {
             box-shadow: none !important;
             background: none !important;
@@ -201,145 +199,122 @@
 
         /* 自定义滚动条样式 */
         ::-webkit-scrollbar {
-            width: 8px;  /* 滚动条宽度 */
-            background-color: white;  /* 滚动条背景色 */
+            width: 8px;
+            background-color: white;
         }
 
-        /* 滚动条滑块 */
         ::-webkit-scrollbar-thumb {
-            background-color: #CCCCCC;  /* 更浅的灰色 */
-            border-radius: 4px;  /* 圆角 */
+            background-color: #CCCCCC;
+            border-radius: 4px;
         }
 
-        /* 移除滚动条轨道的边框 */
         ::-webkit-scrollbar-track {
-            background-color: white;  /* 白色背景 */
-            border: none;  /* 移除边框 */
+            background-color: white;
+            border: none;
         }
 
-        /* 确保整个页面背景为白色 */
         html {
             background-color: white;
-            scrollbar-color: #CCCCCC white;  /* Firefox的滚动条颜色也改为浅灰色 */
-            scrollbar-width: thin;  /* Firefox的滚动条宽度 */
+            scrollbar-color: #CCCCCC white;
+            scrollbar-width: thin;
         }
 
-        /* 添加全局背景色 */
         body, html {
             background-color: white !important;
             margin: 0;
             padding: 0;
-            min-height: 100vh; /* 确保body和html至少和视窗一样高 */
+            min-height: 100vh;
         }
 
-        /* 添加列表项的样式 */
         .list-item {
             font-size: 16px;
             font-weight: normal;
         }
 
-        /* 添加教育经历标题样式 */
         .education-title {
             font-size: 16px;
             font-weight: bold;
         }
 
-        /* 添加教育经历详情样式 */
         .education-details {
             font-size: 16px;
             font-weight: normal;
         }
 
-        /* 添加出版物条目样式 */
         .publication-item {
             font-size: 16px;
             font-weight: normal;
         }
 
-        /* 修改专业软件分类标签样式 */
         .software-category {
             font-size: 16px;
             font-weight: normal;
         }
 
-        /* 修改链接项文本样式 */
-        .link-item span {
-            display: inline-block;
-            min-width: 60px;
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        /* 修改列表项目符号的颜色 */
         ul {
-            list-style-type: disc;  /* 使用实心圆点 */
-            color: #000;  /* 设置为黑色，与内容文本颜色一致 */
+            list-style-type: disc;
+            color: #000;
         }
 
-        /* 确保列表项文本颜色不受父元素影响 */
         ul li {
             color: #000;
         }
 
-        /* 修改列表样式 */
         .list-unstyled {
-            list-style: none;  /* 移除默认项目符号 */
-            padding-left: 0;   /* 移除默认内边距 */
+            list-style: none;
+            padding-left: 0;
         }
 
         .list-unstyled li {
             position: relative;
-            padding-left: 20px;  /* 为自定义项目符号留出空间 */
+            padding-left: 20px;
         }
 
         .list-unstyled li:before {
-            content: "•";  /* 添加自定义项目符号 */
-            color: #000;  /* 设置项目符号颜色为黑色 */
+            content: "•";
+            color: #000;
             position: absolute;
             left: 5px;
         }
 
-        /* 修改 Research interests 列表样式 */
         .interests-list {
-            list-style: none;  /* 移除默认项目符号 */
-            padding-left: 0;   /* 移除默认内边距 */
+            list-style: none;
+            padding-left: 0;
         }
 
         .interests-list li {
             position: relative;
-            padding-left: 20px;  /* 为自定义项目符号留出空间 */
+            padding-left: 20px;
         }
 
         .interests-list li:before {
-            content: "•";  /* 添加自定义项目符号 */
-            color: #000;  /* 设置项目符号颜色为黑色 */
+            content: "•";
+            color: #000;
             position: absolute;
             left: 5px;
         }
 
-        /* 修改路径栏样式 */
         .path-nav {
             color: #000;
             font-family: Arial, sans-serif;
             font-size: 16px;
-            padding: 10px 20px;  /* 减小上下内边距为10px，保持左右内边距为20px */
+            padding: 10px 20px;
             position: sticky;
             top: 0;
             background-color: white;
             z-index: 100;
             margin-bottom: 0;
-            margin-left: -20px;  /* 保持与内容区域对齐 */
+            margin-left: -20px;
         }
 
-        /* 添加图标样式 */
+        /* 这里的图标样式可以保留，或者删除，因为HTML中已经移除了图标 */
         .icon {
-            width: 16px;  /* 设置图标宽度 */
-            height: auto;  /* 高度自动调整以保持比例 */
-            vertical-align: middle;  /* 垂直居中对齐 */
-            margin-right: 8px;  /* 图标与文本之间的间距 */
+            width: 16px;
+            height: auto;
+            vertical-align: middle;
+            margin-right: 8px;
         }
 
-        /* 移除带图片的文献条目的项目符号和内边距 */
         .publication-item[style*="display: flex"] {
             padding-left: 0 !important;
         }
@@ -348,7 +323,6 @@
             content: none !important;
         }
 
-        /* 移除带padding-left: 0的文献条目的项目符号 */
         .publication-item[style*="padding-left: 0"]:before {
             content: none !important;
         }
@@ -367,21 +341,18 @@
                 </div>
             </div>
             <div class="profile-links">
+                <!-- 修改：删除了图标，保留了链接，字体在CSS中已设置为白色 -->
                 <a href="mailto:15035689055liuhaiyang@gmail.com" class="link-item">
-                    <img src="images/mail.png" alt="Email" class="icon">
                     <span>Email</span>
                 </a>
                 <a href="https://orcid.org/0009-0009-8701-0538" class="link-item">
-                    <img src="images/id.png" alt="ORCiD" class="icon">
                     <span>ORCiD</span>
                 </a>
                 <a href="https://maps.app.goo.gl/8UxRNrFbq7MmbCFM7" class="link-item">
-                    <img src="images/location.png" alt="Location" class="icon">
                     <span>Location</span>
                 </a>
                 <div style="height: 20px;"></div>
                 <a href="index.html" class="link-item active">
-                    <img src="images/academic.png" alt="Academic" class="icon">
                     <span>Academic</span>
                 </a>
          
@@ -393,6 +364,7 @@
                 Hey there! This is a personal public webpage that is continually being improved. I am Liu Haiyang from Henan Province, China, and you can call me Ocean!<br>Done is better than Perfect!
             </div>
 
+            <!-- 标题颜色已在CSS .section-title中修改为黑色 -->
             <h2 class="section-title">Research interests</h2>
             <hr class="divider">
             <ul class="interests-list">
@@ -472,7 +444,6 @@
                 <li class="publication-item" style="margin-bottom: 16px; padding-left: 0;">
                     <div style="font-size: 16px; color: #000; margin-bottom: 8px; font-weight: bold; margin-top: 24px;">Co-author</div>
 
-                    <!-- 新增论文条目（与 First author 的条目风格一致：图+文字，display:flex） -->
                     <div style="display: flex; align-items: center; margin-top: 8px;">
                         <img src="images/JAG.png" alt="JAG Paper" style="width:60px;height:auto;margin-right:16px;">
                         <div>Sun, Y., Wu, G., Song, Y., <strong>Liu, H.</strong>, Wang, L., Zhang, Z., Hu, J., 2026. Local effects of pattern interactions in driving urbanization. International Journal of Applied Earth Observation and Geoinformation 146, 105072. https://doi.org/10.1016/j.jag.2025.105072.</div>
